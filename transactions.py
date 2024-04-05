@@ -12,16 +12,20 @@ class CryptoTransaction:
 class BuyTransaction(CryptoTransaction):
     def __init__(self, name, amount, price, date=None):
         super().__init__(name, amount, price, date)
-        self.transaction_type = 'buy'
+        # self.transaction_type = 'buy'
 
 
 class SellTransaction(CryptoTransaction):
-    def __init__(self, name, amount, sell_price, date=None):
+    def __init__(self, name, amount, sell_price, purchase_price, date=None):
         super().__init__(name, amount, sell_price, date)
-        self.transaction_type = 'sell'
+        self.purchase_price = purchase_price
+        self.gain = (self.price - self.purchase_price) * self.amount
+        # self.transaction_type = 'sell'
+    #
+    # @property
+    # def gain(self):
+    #     """Calculate and return the gain or loss from this sale."""
+    #     total_cost = self.amount * self.purchase_price
+    #     total_sale = self.amount * self.price
+    #     return total_sale - total_cost
 
-    def calculate_gain(self, purchase_price):
-        """Calculate and return the gain or loss from this sale."""
-        total_cost = self.amount * purchase_price
-        total_sale = self.amount * self.price
-        return total_sale - total_cost
